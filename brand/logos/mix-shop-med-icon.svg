@@ -1,0 +1,25 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <title>Медицинские товары</title>
+  <!-- внешнее кольцо -->
+  <circle cx="300" cy="300" r="262" fill="none" stroke="#36474F" stroke-width="24"/>
+
+  <!-- соединители (3 луча через 120°) -->
+  <g fill="#1B8E9C">
+    <rect x="292" y="183" width="16" height="25" rx="2"/>
+    <rect x="292" y="183" width="16" height="25" rx="2" transform="rotate(120 300 300)"/>
+    <rect x="292" y="183" width="16" height="25" rx="2" transform="rotate(240 300 300)"/>
+  </g>
+
+  <!-- узлы -->
+  <g fill="#1B8E9C">
+    <circle cx="300" cy="140" r="31"/>
+    <circle cx="300" cy="140" r="31" transform="rotate(120 300 300)"/>
+    <circle cx="300" cy="140" r="31" transform="rotate(240 300 300)"/>
+  </g>
+
+  <!-- центр с крестом -->
+  <circle cx="300" cy="300" r="80" fill="#36474F"/>
+  <path fill="#FFFFFF" d="
+    M282 252 h36 a6 6 0 0 1 6 6 v24 h24 a6 6 0 0 1 6 6 v24 a6 6 0 0 1 -6 6 h-24 v24 a6 6 0 0 1 -6 6 h-36
+    a6 6 0 0 1 -6 -6 v-24 h-24 a6 6 0 0 1 -6 -6 v-24 a6 6 0 0 1 6 -6 h24 v-24 a6 6 0 0 1 6 -6 z"/>
+</svg>

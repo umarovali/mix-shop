@@ -1,0 +1,14 @@
+﻿# Netlify: сборка фронтенда из папки frontend
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# SPA: все адреса (/store/med, /cart ...) отдаём index.html — дальше работает React Router
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

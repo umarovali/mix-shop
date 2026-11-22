@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640">
+  <title>Mix Shop Plus — магазин для дома</title>
+  <!-- фон-круг -->
+  <circle cx="320" cy="320" r="288" fill="#2B2B2B"/>
+
+  <!-- белая черта над M -->
+  <rect x="108" y="184" width="96" height="8" fill="#FFFFFF"/>
+
+  <!-- красная M -->
+  <polygon fill="#F0262C" points="
+    108,207 162,207 214,328 266,207 314,207
+    314,412 274,412 274,300 228,402 200,402
+    168,316 168,557 108,557"/>
+
+  <!-- S: тёмная обводка (разрез с M), затем белая буква -->
+  <g fill="none" stroke-linecap="butt" stroke-linejoin="round">
+    <path stroke="#2B2B2B" stroke-width="70"
+      d="M462 262 C443 245 420 242 396 242 C358 242 328 258 328 281 C328 306 358 312 396 317 C434 322 464 330 464 355 C464 380 434 392 396 392 C368 392 343 385 326 368"/>
+    <path stroke="#FFFFFF" stroke-width="50"
+      d="M462 262 C443 245 420 242 396 242 C358 242 328 258 328 281 C328 306 358 312 396 317 C434 322 464 330 464 355 C464 380 434 392 396 392 C368 392 343 385 326 368"/>
+  </g>
+
+  <!-- красная полоса справа -->
+  <rect x="500" y="364" width="116" height="50" fill="#F0262C"/>
+
+  <!-- надписи -->
+  <text x="324" y="470" text-anchor="middle" fill="#FFFFFF"
+    font-family="Montserrat, 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="38">MIX SHOP PLUS</text>
+  <text x="318" y="502" text-anchor="middle" fill="#FFFFFF"
+    font-family="Montserrat, 'Segoe UI', Arial, sans-serif" font-weight="500" font-size="15" letter-spacing="7">МАГАЗИН ДЛЯ ДОМА</text>
+</svg>
