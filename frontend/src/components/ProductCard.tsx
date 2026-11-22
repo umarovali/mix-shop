@@ -58,7 +58,7 @@ export default function ProductCard({ product }: { product: Product }) {
             </Box>
           )}
         </Box>
-        <Box sx={{ p: { xs: 1.25, sm: 1.5 }, pb: 1 }}>
+        <Box sx={{ p: { xs: 1.25, sm: 1.5 }, pb: 0 }}>
           <Typography
             sx={{ fontWeight: 800, fontSize: { xs: 16, sm: 18 }, color: 'primary.main', lineHeight: 1.2 }}
           >
@@ -67,10 +67,11 @@ export default function ProductCard({ product }: { product: Product }) {
           <Typography
             sx={{
               mt: 0.5,
-              fontSize: { xs: 13, sm: 14 },
-              fontWeight: 500,
-              lineHeight: 1.35,
-              minHeight: '2.7em',
+              fontSize: { xs: 14, sm: 15 },
+              fontWeight: 700,
+              lineHeight: 1.3,
+              color: 'text.primary',
+              minHeight: '2.6em',
               display: '-webkit-box',
               WebkitLineClamp: 2,
               WebkitBoxOrient: 'vertical',
@@ -83,9 +84,10 @@ export default function ProductCard({ product }: { product: Product }) {
           <Typography
             sx={{
               mt: 0.5,
-              fontSize: { xs: 12, sm: 13 },
+              fontSize: { xs: 11.5, sm: 12.5 },
+              fontWeight: 400,
               lineHeight: 1.4,
-              color: 'text.secondary',
+              color: '#8A8A96',
               minHeight: { xs: '2.8em', md: '4.2em' },
               display: '-webkit-box',
               WebkitLineClamp: { xs: 2, md: 3 },
@@ -97,7 +99,7 @@ export default function ProductCard({ product }: { product: Product }) {
           </Typography>
         </Box>
       </CardActionArea>
-      <Box sx={{ p: { xs: 1.25, sm: 1.5 }, pt: 0.5 }}>
+      <Box sx={{ p: { xs: 1.25, sm: 1.5 }, pt: { xs: 0.75, sm: 1 } }}>
         <AddToCartButton product={product} size="small" fullWidth />
       </Box>
     </Card>
