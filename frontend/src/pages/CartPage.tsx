@@ -9,6 +9,7 @@ import {
   DialogTitle,
   Divider,
   IconButton,
+  InputAdornment,
   Paper,
   TextField,
   Typography,
@@ -24,7 +25,16 @@ import { useCartStore } from '../store/cart';
 import { getProduct } from '../data/products';
 import { STORES } from '../data/stores';
 import { IS_WHOLESALE } from '../config/mode';
-import { formatPrice, getMinQty, getPrice, isAvailableInMode, plural } from '../utils/format';
+import {
+  PHONE_PREFIX,
+  formatPhoneLocal,
+  formatPrice,
+  getMinQty,
+  getPrice,
+  isAvailableInMode,
+  isPhoneLocalValid,
+  plural,
+} from '../utils/format';
 import { buildOrderMessage, cartTotal, whatsappUrl, type CartLine } from '../utils/whatsapp';
 
 const WHATSAPP_GREEN = '#1FAF54';
@@ -48,12 +58,12 @@ export default function CartPage() {
   });
 
   const nameError = name.trim().length < 2;
-  const phoneError = phone.replace(/\D/g, '').length < 9;
+  const phoneError = !isPhoneLocalValid(phone);
 
   const handleOrder = () => {
     setSubmitted(true);
     if (nameError || phoneError) return;
-    const text = buildOrderMessage(lines, { name, phone, comment });
+    const text = buildOrderMessage(lines, { name, phone: `${PHONE_PREFIX} ${phone}`, comment });
     window.open(whatsappUrl(text), '_blank', 'noopener');
     setSentDialog(true);
   };
@@ -198,14 +208,23 @@ export default function CartPage() {
             />
             <TextField
               label="Телефон"
-              placeholder="+998 90 123 45 67"
+              placeholder="555 52 52 52"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(formatPhoneLocal(e.target.value))}
               error={submitted && phoneError}
-              helperText={submitted && phoneError ? 'Введите номер телефона' : ' '}
+              helperText={submitted && phoneError ? 'Введите номер: 9 цифр после +996' : ' '}
               type="tel"
-              autoComplete="tel"
-              slotProps={{ htmlInput: { inputMode: 'tel' } }}
+              autoComplete="tel-national"
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start" sx={{ '& p': { color: 'text.primary', fontWeight: 500 } }}>
+                      {PHONE_PREFIX}
+                    </InputAdornment>
+                  ),
+                },
+                htmlInput: { inputMode: 'tel' },
+              }}
             />
             <TextField
               label="Комментарий (необязательно)"

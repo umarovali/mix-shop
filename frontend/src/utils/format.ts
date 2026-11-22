@@ -21,6 +21,24 @@ export function isAvailableInMode(product: Product): boolean {
   return getPrice(product) !== undefined;
 }
 
+export const PHONE_PREFIX = '+996';
+
+/**
+ * Номер Кыргызстана без кода страны: 9 цифр, вид «555 52 52 52».
+ * Понимает вставку полного номера (+996 555..., 0555...).
+ */
+export function formatPhoneLocal(input: string): string {
+  let d = input.replace(/\D/g, '');
+  if (d.length > 9 && d.startsWith('996')) d = d.slice(3);
+  if (d.startsWith('0')) d = d.slice(1);
+  d = d.slice(0, 9);
+  return [d.slice(0, 3), d.slice(3, 5), d.slice(5, 7), d.slice(7, 9)].filter(Boolean).join(' ');
+}
+
+export function isPhoneLocalValid(local: string): boolean {
+  return local.replace(/\D/g, '').length === 9;
+}
+
 /** plural(5, ['товар', 'товара', 'товаров']) → 'товаров' */
 export function plural(n: number, forms: [string, string, string]): string {
   const a = Math.abs(n) % 100;
