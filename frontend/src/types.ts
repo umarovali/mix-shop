@@ -10,6 +10,10 @@ export interface BrandColors {
   secondary: string;
   /** светлый фон для плашек магазина */
   soft: string;
+  /** градиент для кнопок и активных элементов */
+  gradient: string;
+  /** насыщенный градиент для баннеров и карточек магазина */
+  hero: string;
 }
 
 export interface Store {

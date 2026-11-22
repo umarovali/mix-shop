@@ -4,6 +4,7 @@ import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { IS_WHOLESALE } from '../config/mode';
 import { HEADER_HEIGHT } from '../config/layout';
+import { DEFAULT_COLORS } from '../theme';
 import { useCartCount } from '../store/cart';
 import type { Store } from '../types';
 
@@ -30,7 +31,21 @@ export default function Header({ store }: { store?: Store }) {
       position="sticky"
       color="inherit"
       elevation={0}
-      sx={{ bgcolor: 'background.paper', borderBottom: 1, borderColor: 'divider' }}
+      sx={{
+        bgcolor: 'rgba(255,255,255,.9)',
+        backdropFilter: 'saturate(180%) blur(12px)',
+        boxShadow: '0 1px 0 rgba(20,20,43,.06)',
+        // фирменная полоса под шапкой
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: 3,
+          backgroundImage: (store ?? { colors: DEFAULT_COLORS }).colors.gradient,
+        },
+      }}
     >
       <Container maxWidth="lg" disableGutters>
         <Toolbar disableGutters sx={{ gap: 1, px: { xs: 1, sm: 2 }, minHeight: HEADER_HEIGHT }}>
@@ -70,7 +85,18 @@ export default function Header({ store }: { store?: Store }) {
             </Box>
           </Box>
 
-          {IS_WHOLESALE && <Chip label="ОПТ" color="primary" size="small" sx={{ fontWeight: 700 }} />}
+          {IS_WHOLESALE && (
+            <Chip
+              label="ОПТ"
+              size="small"
+              sx={{
+                fontWeight: 800,
+                letterSpacing: '.06em',
+                color: '#FFFFFF',
+                backgroundImage: (store ?? { colors: DEFAULT_COLORS }).colors.gradient,
+              }}
+            />
+          )}
 
           <IconButton component={RouterLink} to="/cart" aria-label={`Корзина, позиций: ${count}`}>
             <Badge badgeContent={count} color="primary">

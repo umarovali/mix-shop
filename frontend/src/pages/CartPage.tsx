@@ -20,6 +20,8 @@ import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import ProductImage from '../components/ProductImage';
 import QuantityControl from '../components/QuantityControl';
+import LogoBadge from '../components/LogoBadge';
+import { CARD_SHADOW } from '../theme';
 import { HEADER_HEIGHT } from '../config/layout';
 import { useCartStore } from '../store/cart';
 import { getProduct } from '../data/products';
@@ -37,7 +39,7 @@ import {
 } from '../utils/format';
 import { buildOrderMessage, cartTotal, whatsappUrl, type CartLine } from '../utils/whatsapp';
 
-const WHATSAPP_GREEN = '#1FAF54';
+const WHATSAPP_GRADIENT = 'linear-gradient(135deg, #2BD46A 0%, #1FAF54 55%, #168F44 100%)';
 
 export default function CartPage() {
   const navigate = useNavigate();
@@ -105,9 +107,19 @@ export default function CartPage() {
             const storeLines = lines.filter((l) => l.product.storeId === store.id);
             if (!storeLines.length) return null;
             return (
-              <Paper key={store.id} variant="outlined" sx={{ borderRadius: '16px', overflow: 'hidden' }}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, px: 2, py: 1.25, bgcolor: store.colors.soft }}>
-                  <Box component="img" src={store.icon} alt="" sx={{ width: 28, height: 28, objectFit: 'contain' }} />
+              <Paper key={store.id} elevation={0} sx={{ borderRadius: '20px', overflow: 'hidden', boxShadow: CARD_SHADOW }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1.25,
+                    px: 2,
+                    py: 1.25,
+                    color: '#FFFFFF',
+                    backgroundImage: store.colors.hero,
+                  }}
+                >
+                  <LogoBadge src={store.icon} size={34} />
                   <Typography sx={{ fontWeight: 700 }}>{store.name}</Typography>
                 </Box>
                 {storeLines.map((l, idx) => {
@@ -182,8 +194,8 @@ export default function CartPage() {
 
         {/* Итог и оформление */}
         <Paper
-          variant="outlined"
-          sx={{ p: { xs: 2, md: 3 }, borderRadius: '16px', position: { md: 'sticky' }, top: { md: HEADER_HEIGHT.sm + 24 } }}
+          elevation={0}
+          sx={{ p: { xs: 2, md: 3 }, borderRadius: '20px', boxShadow: CARD_SHADOW, position: { md: 'sticky' }, top: { md: HEADER_HEIGHT.sm + 24 } }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'space-between', color: 'text.secondary', fontSize: 14 }}>
             <span>
@@ -238,7 +250,12 @@ export default function CartPage() {
               size="large"
               variant="contained"
               startIcon={<WhatsApp />}
-              sx={{ mt: 1, bgcolor: WHATSAPP_GREEN, '&:hover': { bgcolor: '#17964A' } }}
+              sx={{
+                mt: 1,
+                backgroundImage: WHATSAPP_GRADIENT,
+                boxShadow: '0 6px 16px rgba(31,175,84,.35)',
+                '&:hover': { boxShadow: '0 8px 22px rgba(31,175,84,.45)' },
+              }}
             >
               Отправить заказ в WhatsApp
             </Button>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Box, Chip, Container, Paper, Typography } from '@mui/material';
+import { alpha } from '@mui/material/styles';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import ProductImage from '../components/ProductImage';
 import AddToCartButton from '../components/AddToCartButton';
@@ -21,7 +22,7 @@ export default function ProductPage() {
 
   const priceBlock = (
     <Box>
-      <Typography sx={{ fontWeight: 700, fontSize: { xs: 24, md: 30 }, lineHeight: 1.2 }}>
+      <Typography sx={{ fontWeight: 800, fontSize: { xs: 26, md: 32 }, lineHeight: 1.2, color: 'primary.main' }}>
         {formatPrice(price)}
       </Typography>
       {IS_WHOLESALE && (
@@ -48,7 +49,7 @@ export default function ProductPage() {
             <ProductImage
               src={product.images[activeImage]}
               alt={product.name}
-              sx={{ borderRadius: '20px', border: 1, borderColor: 'divider' }}
+              sx={{ borderRadius: '24px', boxShadow: '0 4px 20px rgba(20,20,43,.08)' }}
             />
             {product.images.length > 1 && (
               <Box sx={{ display: 'flex', gap: 1, mt: 1.5, overflowX: 'auto' }}>
@@ -112,8 +113,17 @@ export default function ProductPage() {
 
             {/* Цена и кнопка — на компьютере здесь, на телефоне внизу экрана */}
             <Paper
-              variant="outlined"
-              sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 3, p: 2.5, mt: 3, borderRadius: '16px' }}
+              elevation={0}
+              sx={(t) => ({
+                display: { xs: 'none', md: 'flex' },
+                alignItems: 'center',
+                gap: 3,
+                p: 2.5,
+                mt: 3,
+                borderRadius: '20px',
+                bgcolor: alpha(t.palette.primary.main, 0.06),
+                border: `1px solid ${alpha(t.palette.primary.main, 0.15)}`,
+              })}
             >
               <Box sx={{ flex: 1 }}>{priceBlock}</Box>
               <Box sx={{ width: 220 }}>
@@ -175,13 +185,12 @@ export default function ProductPage() {
           px: 2,
           pt: 1.5,
           pb: 'calc(12px + env(safe-area-inset-bottom))',
-          borderTop: 1,
-          borderColor: 'divider',
-          borderRadius: 0,
+          borderRadius: '20px 20px 0 0',
+          boxShadow: '0 -6px 24px rgba(20,20,43,.10)',
         }}
       >
         <Box sx={{ flex: 1, minWidth: 0 }}>
-          <Typography noWrap sx={{ fontWeight: 700, fontSize: 18 }}>
+          <Typography noWrap sx={{ fontWeight: 800, fontSize: 19, color: 'primary.main' }}>
             {formatPrice(price)}
           </Typography>
           {IS_WHOLESALE && (

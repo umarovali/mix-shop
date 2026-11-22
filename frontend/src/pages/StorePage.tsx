@@ -2,6 +2,9 @@ import { Box, Button, Chip, Container, InputAdornment, TextField, Typography } f
 import SearchRounded from '@mui/icons-material/SearchRounded';
 import { useParams, useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
+import LogoBadge from '../components/LogoBadge';
+import Decor from '../components/Decor';
+import { CARD_SHADOW } from '../theme';
 import { HEADER_HEIGHT } from '../config/layout';
 import { getStore } from '../data/stores';
 import { CATEGORIES, PRODUCTS } from '../data/products';
@@ -38,22 +41,19 @@ export default function StorePage() {
 
   return (
     <>
-      {/* Плашка магазина */}
-      <Box sx={{ bgcolor: store.colors.soft }}>
-        <Container maxWidth="lg" sx={{ py: { xs: 2.5, md: 4 }, display: 'flex', alignItems: 'center', gap: 2 }}>
-          <Box
-            component="img"
-            src={store.icon}
-            alt=""
-            sx={{ width: { xs: 64, md: 96 }, height: { xs: 64, md: 96 }, objectFit: 'contain', flexShrink: 0 }}
-          />
+      {/* Цветной баннер магазина */}
+      <Box sx={{ backgroundImage: store.colors.hero, color: '#FFFFFF', position: 'relative', overflow: 'hidden' }}>
+        <Decor accent={store.id === 'plus' ? 'rgba(232,20,27,.55)' : 'rgba(255,255,255,.14)'} />
+        <Container
+          maxWidth="lg"
+          sx={{ position: 'relative', py: { xs: 3, md: 5 }, display: 'flex', alignItems: 'center', gap: { xs: 2, md: 3 } }}
+        >
+          <LogoBadge src={store.icon} size={{ xs: 72, md: 112 }} />
           <Box sx={{ minWidth: 0 }}>
-            <Typography component="h1" sx={{ fontWeight: 700, fontSize: { xs: 22, md: 32 }, lineHeight: 1.2 }}>
+            <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: 24, md: 38 }, lineHeight: 1.15 }}>
               {store.name}
             </Typography>
-            <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
-              {store.description}
-            </Typography>
+            <Typography sx={{ fontSize: { xs: 13, md: 16 }, opacity: 0.88, mt: 0.5 }}>{store.description}</Typography>
           </Box>
         </Container>
       </Box>
@@ -64,17 +64,20 @@ export default function StorePage() {
           position: 'sticky',
           top: HEADER_HEIGHT,
           zIndex: 2,
-          bgcolor: 'background.default',
-          borderBottom: 1,
-          borderColor: 'divider',
+          bgcolor: 'rgba(243,244,248,.88)',
+          backdropFilter: 'saturate(180%) blur(12px)',
         }}
       >
-        <Container maxWidth="lg" sx={{ pt: 1.5, pb: 1 }}>
+        <Container maxWidth="lg" sx={{ pt: 1.5, pb: 1.25 }}>
           <TextField
             size="small"
             placeholder="Поиск по названию или артикулу"
             value={query}
             onChange={(e) => updateParam('q', e.target.value)}
+            sx={{
+              '& .MuiOutlinedInput-root': { boxShadow: CARD_SHADOW, height: 46 },
+              '& .MuiOutlinedInput-notchedOutline': { borderColor: 'transparent' },
+            }}
             slotProps={{
               input: {
                 startAdornment: (
@@ -99,24 +102,30 @@ export default function StorePage() {
               '&::-webkit-scrollbar': { display: 'none' },
             }}
           >
-            <Chip
-              label="Все"
-              clickable
-              color={!activeCat ? 'primary' : 'default'}
-              variant={!activeCat ? 'filled' : 'outlined'}
-              onClick={() => updateParam('cat', null)}
-            />
-            {categories.map((c) => (
-              <Chip
-                key={c.id}
-                label={c.name}
-                clickable
-                color={activeCat === c.id ? 'primary' : 'default'}
-                variant={activeCat === c.id ? 'filled' : 'outlined'}
-                onClick={() => updateParam('cat', c.id)}
-                sx={{ flexShrink: 0, bgcolor: activeCat === c.id ? undefined : 'background.paper' }}
-              />
-            ))}
+            {[{ id: null, name: 'Все' }, ...categories].map((c) => {
+              const active = activeCat === c.id;
+              return (
+                <Chip
+                  key={c.id ?? 'all'}
+                  label={c.name}
+                  clickable
+                  onClick={() => updateParam('cat', c.id)}
+                  sx={{
+                    flexShrink: 0,
+                    height: 36,
+                    px: 0.5,
+                    border: 'none',
+                    ...(active
+                      ? {
+                          color: '#FFFFFF',
+                          backgroundImage: store.colors.gradient,
+                          boxShadow: '0 4px 12px rgba(0,0,0,.15)',
+                        }
+                      : { bgcolor: 'background.paper', boxShadow: CARD_SHADOW }),
+                  }}
+                />
+              );
+            })}
           </Box>
         </Container>
       </Box>

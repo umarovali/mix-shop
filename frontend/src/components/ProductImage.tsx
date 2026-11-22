@@ -13,7 +13,7 @@ export default function ProductImage({ src, alt, sx }: Props) {
   return (
     <Box
       sx={[
-        { position: 'relative', aspectRatio: '1 / 1', width: '100%', overflow: 'hidden', bgcolor: '#F0F0F2' },
+        { position: 'relative', aspectRatio: '1 / 1', width: '100%', overflow: 'hidden', bgcolor: '#F4F4F7' },
         ...(Array.isArray(sx) ? sx : [sx]),
       ]}
     >
