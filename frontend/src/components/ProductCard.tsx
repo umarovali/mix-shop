@@ -79,6 +79,22 @@ export default function ProductCard({ product }: { product: Product }) {
           >
             {product.name}
           </Typography>
+          {/* Описание: 2 строки на телефоне и планшете, 3 на компьютере, дальше «…» */}
+          <Typography
+            sx={{
+              mt: 0.5,
+              fontSize: { xs: 12, sm: 13 },
+              lineHeight: 1.4,
+              color: 'text.secondary',
+              minHeight: { xs: '2.8em', md: '4.2em' },
+              display: '-webkit-box',
+              WebkitLineClamp: { xs: 2, md: 3 },
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
+            {product.description}
+          </Typography>
         </Box>
       </CardActionArea>
       <Box sx={{ p: { xs: 1.25, sm: 1.5 }, pt: 0.5 }}>

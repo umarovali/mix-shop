@@ -140,6 +140,9 @@ export default function StorePage() {
             sx={{
               display: 'grid',
               gap: { xs: 1.5, md: 2.5 },
+              // телефон: вторая колонка ниже на 15px — «лесенка» для разнообразия
+              '& > :nth-of-type(2n)': { position: 'relative', top: { xs: '15px', sm: 0 } },
+              pb: { xs: '15px', sm: 0 },
               gridTemplateColumns: {
                 xs: 'repeat(2, minmax(0, 1fr))',
                 sm: 'repeat(3, minmax(0, 1fr))',
