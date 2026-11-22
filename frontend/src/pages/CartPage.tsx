@@ -22,6 +22,7 @@ import ProductImage from '../components/ProductImage';
 import QuantityControl from '../components/QuantityControl';
 import LogoBadge from '../components/LogoBadge';
 import { CARD_SHADOW } from '../theme';
+import { enter } from '../utils/animations';
 import { HEADER_HEIGHT } from '../config/layout';
 import { useCartStore } from '../store/cart';
 import { getProduct } from '../data/products';
@@ -107,7 +108,11 @@ export default function CartPage() {
             const storeLines = lines.filter((l) => l.product.storeId === store.id);
             if (!storeLines.length) return null;
             return (
-              <Paper key={store.id} elevation={0} sx={{ borderRadius: '20px', overflow: 'hidden', boxShadow: CARD_SHADOW }}>
+              <Paper
+                key={store.id}
+                elevation={0}
+                sx={{ borderRadius: '20px', overflow: 'hidden', boxShadow: CARD_SHADOW, ...enter(0.05) }}
+              >
                 <Box
                   sx={{
                     display: 'flex',
@@ -195,7 +200,7 @@ export default function CartPage() {
         {/* Итог и оформление */}
         <Paper
           elevation={0}
-          sx={{ p: { xs: 2, md: 3 }, borderRadius: '20px', boxShadow: CARD_SHADOW, position: { md: 'sticky' }, top: { md: HEADER_HEIGHT.sm + 24 } }}
+          sx={{ p: { xs: 2, md: 3 }, borderRadius: '20px', boxShadow: CARD_SHADOW, ...enter(0.15), position: { md: 'sticky' }, top: { md: HEADER_HEIGHT.sm + 24 } }}
         >
           <Box sx={{ display: 'flex', justifyContent: 'space-between', color: 'text.secondary', fontSize: 14 }}>
             <span>

@@ -5,6 +5,7 @@ import ProductImage from './ProductImage';
 import AddToCartButton from './AddToCartButton';
 import { IS_WHOLESALE } from '../config/mode';
 import { CARD_SHADOW_HOVER } from '../theme';
+import { enter, stagger } from '../utils/animations';
 import { formatPrice, getMinQty, getPrice } from '../utils/format';
 import type { Product } from '../types';
 
@@ -18,12 +19,19 @@ const pill = {
   fontWeight: 700,
 } as const;
 
-export default function ProductCard({ product }: { product: Product }) {
+interface Props {
+  product: Product;
+  /** позиция в списке — для появления карточек «волной» */
+  index?: number;
+}
+
+export default function ProductCard({ product, index = 0 }: Props) {
   const price = getPrice(product) ?? 0;
 
   return (
     <Card
       sx={{
+        ...enter(stagger(index, 0.15, 0.06)),
         display: 'flex',
         flexDirection: 'column',
         height: '100%',

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Box, Chip, Container, Paper, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
+import { enter, fadeUp, zoomIn } from '../utils/animations';
 import { Link as RouterLink, useParams } from 'react-router-dom';
 import ProductImage from '../components/ProductImage';
 import AddToCartButton from '../components/AddToCartButton';
@@ -45,7 +46,7 @@ export default function ProductPage() {
           }}
         >
           {/* Галерея */}
-          <Box sx={{ position: { md: 'sticky' }, top: { md: 92 } }}>
+          <Box sx={{ position: { md: 'sticky' }, top: { md: 92 }, ...enter(0.05, zoomIn, 0.6) }}>
             <ProductImage
               src={product.images[activeImage]}
               alt={product.name}
@@ -79,7 +80,7 @@ export default function ProductPage() {
           </Box>
 
           {/* Информация */}
-          <Box>
+          <Box sx={enter(0.15)}>
             {category && (
               <Chip
                 label={category.name}
@@ -186,6 +187,8 @@ export default function ProductPage() {
           pt: 1.5,
           pb: 'calc(12px + env(safe-area-inset-bottom))',
           borderRadius: '20px 20px 0 0',
+          // панель «выезжает» снизу
+          ...enter(0.25, fadeUp, 0.5),
           boxShadow: '0 -6px 24px rgba(20,20,43,.10)',
         }}
       >

@@ -5,6 +5,7 @@ import ProductCard from '../components/ProductCard';
 import LogoBadge from '../components/LogoBadge';
 import Decor from '../components/Decor';
 import { CARD_SHADOW } from '../theme';
+import { enter, zoomIn } from '../utils/animations';
 import { HEADER_HEIGHT } from '../config/layout';
 import { getStore } from '../data/stores';
 import { CATEGORIES, PRODUCTS } from '../data/products';
@@ -48,8 +49,10 @@ export default function StorePage() {
           maxWidth="lg"
           sx={{ position: 'relative', py: { xs: 3, md: 5 }, display: 'flex', alignItems: 'center', gap: { xs: 2, md: 3 } }}
         >
-          <LogoBadge src={store.icon} size={{ xs: 72, md: 112 }} />
-          <Box sx={{ minWidth: 0 }}>
+          <Box sx={enter(0.05, zoomIn, 0.55)}>
+            <LogoBadge src={store.icon} size={{ xs: 72, md: 112 }} />
+          </Box>
+          <Box sx={{ minWidth: 0, ...enter(0.12) }}>
             <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: 24, md: 38 }, lineHeight: 1.15 }}>
               {store.name}
             </Typography>
@@ -150,8 +153,8 @@ export default function StorePage() {
               },
             }}
           >
-            {list.map((p) => (
-              <ProductCard key={p.id} product={p} />
+            {list.map((p, i) => (
+              <ProductCard key={p.id} product={p} index={i} />
             ))}
           </Box>
         ) : (

@@ -7,6 +7,7 @@ import Decor from '../components/Decor';
 import { STORES } from '../data/stores';
 import { IS_WHOLESALE } from '../config/mode';
 import { DEFAULT_COLORS, CARD_SHADOW } from '../theme';
+import { enter, stagger } from '../utils/animations';
 
 const FEATURES = [
   { icon: StorefrontRounded, title: 'Три магазина', text: 'Дом, спорт и здоровье в одном месте' },
@@ -50,13 +51,16 @@ export default function HomePage() {
               ОПТОВЫЙ САЙТ
             </Box>
           )}
-          <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: 30, sm: 38, md: 52 }, lineHeight: 1.1 }}>
+          <Typography
+            component="h1"
+            sx={{ fontWeight: 800, fontSize: { xs: 30, sm: 38, md: 52 }, lineHeight: 1.1, ...enter(0.05) }}
+          >
             Всё нужное —{' '}
             <Box component="span" sx={{ color: '#FF4A4F', whiteSpace: 'nowrap' }}>
               в одном месте
             </Box>
           </Typography>
-          <Typography sx={{ mt: 1.5, maxWidth: 520, fontSize: { xs: 15, md: 18 }, opacity: 0.85 }}>
+          <Typography sx={{ mt: 1.5, maxWidth: 520, fontSize: { xs: 15, md: 18 }, opacity: 0.85, ...enter(0.15) }}>
             {IS_WHOLESALE
               ? 'Оптовые цены на товары для дома, спорта и здоровья. Минимальная партия указана у каждого товара.'
               : 'Товары для дома, спорта и здоровья. Выберите магазин, соберите корзину и отправьте заказ в WhatsApp.'}
@@ -67,8 +71,10 @@ export default function HomePage() {
       {/* Магазины — карточки «наезжают» на баннер */}
       <Container maxWidth="lg" sx={{ mt: { xs: -6, md: -8 }, position: 'relative' }}>
         <Box sx={{ display: 'grid', gap: { xs: 2, md: 3 }, gridTemplateColumns: { xs: '1fr', md: 'repeat(3, 1fr)' } }}>
-          {STORES.map((store) => (
-            <StoreCard key={store.id} store={store} />
+          {STORES.map((store, i) => (
+            <Box key={store.id} sx={{ display: 'grid', ...enter(stagger(i, 0.25, 0.12)) }}>
+              <StoreCard store={store} />
+            </Box>
           ))}
         </Box>
 
@@ -81,10 +87,11 @@ export default function HomePage() {
             gridTemplateColumns: { xs: '1fr', sm: 'repeat(3, 1fr)' },
           }}
         >
-          {FEATURES.map(({ icon: Icon, title, text }) => (
+          {FEATURES.map(({ icon: Icon, title, text }, i) => (
             <Box
               key={title}
               sx={{
+                ...enter(stagger(i, 0.6, 0.08)),
                 display: 'flex',
                 alignItems: 'center',
                 gap: 1.5,

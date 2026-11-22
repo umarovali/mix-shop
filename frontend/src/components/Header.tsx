@@ -5,6 +5,7 @@ import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';
 import { IS_WHOLESALE } from '../config/mode';
 import { HEADER_HEIGHT } from '../config/layout';
 import { DEFAULT_COLORS } from '../theme';
+import { popOnce } from '../utils/animations';
 import { useCartCount } from '../store/cart';
 import type { Store } from '../types';
 
@@ -99,7 +100,8 @@ export default function Header({ store }: { store?: Store }) {
           )}
 
           <IconButton component={RouterLink} to="/cart" aria-label={`Корзина, позиций: ${count}`}>
-            <Badge badgeContent={count} color="primary">
+            {/* key={count}: при изменении количества значок слегка «прыгает» */}
+            <Badge key={count} badgeContent={count} color="primary" sx={count > 0 ? popOnce : undefined}>
               <ShoppingCartOutlined />
             </Badge>
           </IconButton>
