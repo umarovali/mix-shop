@@ -1,4 +1,4 @@
-﻿import { Box, Button, Chip, Container, InputAdornment, TextField, Typography } from '@mui/material';
+import { Box, Button, Chip, Container, InputAdornment, TextField, Typography } from '@mui/material';
 import SearchRounded from '@mui/icons-material/SearchRounded';
 import { useParams, useSearchParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';

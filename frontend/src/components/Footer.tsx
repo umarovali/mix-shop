@@ -1,4 +1,4 @@
-﻿import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography } from '@mui/material';
 import { IS_WHOLESALE } from '../config/mode';
 
 const YEAR = new Date().getFullYear();

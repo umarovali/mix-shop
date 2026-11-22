@@ -1,4 +1,4 @@
-﻿import { AppBar, Badge, Box, Chip, Container, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Badge, Box, Chip, Container, IconButton, Toolbar, Typography } from '@mui/material';
 import ArrowBackIosNewRounded from '@mui/icons-material/ArrowBackIosNewRounded';
 import ShoppingCartOutlined from '@mui/icons-material/ShoppingCartOutlined';
 import { Link as RouterLink, useLocation, useNavigate } from 'react-router-dom';

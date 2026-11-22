@@ -1,4 +1,4 @@
-﻿# Netlify: сборка фронтенда из папки frontend
+# Netlify: сборка фронтенда из папки frontend
 [build]
   base = "frontend"
   command = "npm run build"
