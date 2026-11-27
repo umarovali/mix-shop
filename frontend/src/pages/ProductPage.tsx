@@ -50,6 +50,7 @@ export default function ProductPage() {
             <ProductImage
               src={product.images[activeImage]}
               alt={product.name}
+              product={product}
               sx={{ borderRadius: '24px', boxShadow: '0 4px 20px rgba(20,20,43,.08)' }}
             />
             {product.images.length > 1 && (

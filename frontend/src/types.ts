@@ -32,6 +32,8 @@ export interface Category {
   id: string;
   storeId: StoreId;
   name: string;
+  /** ключ иконки из config/categoryIcons.ts — выбирается в админке */
+  icon?: string;
 }
 
 export interface ProductSpec {

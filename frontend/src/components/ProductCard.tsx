@@ -48,7 +48,7 @@ export default function ProductCard({ product, index = 0 }: Props) {
         sx={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start' }}
       >
         <Box sx={{ position: 'relative' }}>
-          <ProductImage src={product.images[0]} alt={product.name} />
+          <ProductImage src={product.images[0]} alt={product.name} product={product} />
           {!product.inStock && (
             <Box sx={{ ...pill, left: 8, bgcolor: 'rgba(22,22,29,.75)', color: '#FFFFFF' }}>Нет в наличии</Box>
           )}

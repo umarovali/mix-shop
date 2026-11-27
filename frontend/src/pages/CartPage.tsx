@@ -138,7 +138,7 @@ export default function CartPage() {
                           to={`/store/${l.product.storeId}/product/${l.product.id}`}
                           sx={{ width: { xs: 72, sm: 88 }, flexShrink: 0, borderRadius: '12px', overflow: 'hidden' }}
                         >
-                          <ProductImage src={l.product.images[0]} alt={l.product.name} />
+                          <ProductImage src={l.product.images[0]} alt={l.product.name} product={l.product} compact />
                         </Box>
                         <Box sx={{ flex: 1, minWidth: 0 }}>
                           <Box sx={{ display: 'flex', gap: 1, alignItems: 'flex-start' }}>
